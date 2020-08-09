@@ -19,4 +19,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::middleware(['auth'])->group(function() {
+	Route::get('/dashboard', 'HomeController@index')->name('home');
+	Route::get('/estoque', 'EstoqueController@index')->name('estoque');
+	Route::get('/produtos', 'ProdutosController@index')->name('produtos');
+	Route::get('/relatorios', 'RelatoriosController@index')->name('relatorios');
+});
+
+
