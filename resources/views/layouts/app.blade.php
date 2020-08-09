@@ -71,11 +71,15 @@
                 </div>
             </div>
         </nav>
+        <div style="display:flex;flex-wrap: nowrap;">
+            <div class="sidebar" >
+                @include('includes.sidebar')
+            </div>
+            <div style="flex-grow:3;">
+                @yield('content')
+            </div>
+        </div>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
     </div>
-    <script src="{{ asset('site/jquery.js') }}"></script>
 </body>
 </html>

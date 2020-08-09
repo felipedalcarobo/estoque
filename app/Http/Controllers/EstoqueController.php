@@ -13,7 +13,11 @@ class EstoqueController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages/informacoes-estoque');
+    }
+
+    public function baixaEstoque() {
+        return view('pages/baixa-estoque');
     }
 
     /**
