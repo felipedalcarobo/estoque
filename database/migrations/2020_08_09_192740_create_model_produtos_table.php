@@ -16,7 +16,7 @@ class CreateModelProdutosTable extends Migration
         Schema::create('produtos', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user')->unsigned();
-            $table->string('produto')->unique();
+            $table->string('produto');
             $table->string('sku')->unique();
             $table->double('preco', 10, 2);
             $table->timestamps();
