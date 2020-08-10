@@ -25,8 +25,7 @@ Route::middleware(['auth'])->group(function() {
 	Route::post('/salvar-estoque', 'EstoqueController@store')->name('salvar-estoque');
 	Route::get('/baixa-estoque', 'EstoqueController@baixaEstoque')->name('baixa-estoque');
 	Route::get('/baixa-estoque/produto/{id}', 'EstoqueController@edit');
-	Route::post('/salvar-retirada', 'EstoqueController@update')->name('salvar-retirada');
-	
+	Route::post('/salvar-retirada', 'EstoqueController@update')->name('salvar-retirada');	
 	Route::get('/produtos', 'ProdutosController@index')->name('produtos');
 	Route::post('/excluir-produto', 'ProdutosController@delete')->name('excluir-produto');
 	Route::post('/editar-produto', 'ProdutosController@update')->name('editar-produto');

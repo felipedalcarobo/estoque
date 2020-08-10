@@ -11031,9 +11031,41 @@ a.text-dark:focus {
   color: red;
 }
 
+.abaixode100 {
+  margin-bottom: 30px;
+  margin-top: 30px;
+  padding-bottom: 50px;
+  padding-top: 10px;
+  border: 1px solid #e22424b5;
+}
 
+.abaixode100 p {  
+  font-weight: 600;
+  font-size: 16px;
+  padding: 30px 30px 0;
+  color: red;
+}
 
+.relatoriodetalhado {
+  margin-bottom: 30px;
+  margin-top: 30px;
+  padding-bottom: 50px;
+  padding-top: 10px;
+  border: 1px solid #e22424b5;
+}
 
+.relatoriodetalhado p {  
+  font-weight: 600;
+  font-size: 16px;
+  padding: 30px 30px 0;
+  color: blue;
+}
+
+.estoquecheio {
+  text-align: center;
+  font-weight: 700;
+  font-size: 16px;
+}
 
 
 

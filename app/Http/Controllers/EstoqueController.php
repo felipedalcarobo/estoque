@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ModelEstoque;
 use App\Models\ModelProdutos;
+use App\Models\ModelRelatorios;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
@@ -78,7 +79,7 @@ class EstoqueController extends Controller
         try {
 
             $data = [
-                'id_produto'=> request('produto'),
+                'id_produto'  => request('produto'),
                 'quantidade'  => request('quantidade'),
             ];
 
@@ -92,8 +93,18 @@ class EstoqueController extends Controller
             } 
             else 
             {
-                $produto = ModelEstoque::create($data);
+                $estoque = ModelEstoque::create($data);
             }
+
+            // criar registro na tabela relatorios
+            $datarelatorio = [
+                'quantidade_movimentacao' => request('quantidade'),
+                'id_produto'              => request('produto'),
+                'tipo_movimentacao'       => 'E',
+                'canal'                   => 'sistema'
+            ];
+
+            $relarorio = ModelRelatorios::create($datarelatorio);
 
             DB::commit();
             return redirect()->route('estoque');
@@ -141,11 +152,6 @@ class EstoqueController extends Controller
      */
     public function update(Request $request)
     {
-        // $validatedData = $request->validate([ 
-        //     'produto' => 'required|max:25',
-        //     'preco'   => 'required|max:20',
-        // ]);
-
         $validator = Validator::make($request->all(), [
             'id_estoque' => 'required|max:25',
             'quantidade'   => 'required|numeric|min:1',
@@ -173,6 +179,16 @@ class EstoqueController extends Controller
         try {
             $estoque->quantidade = $this->total;
             $estoque->save();
+
+            // criar registro na tabela relatorios
+            $datarelatorio = [
+                'quantidade_movimentacao' => request('quantidade'),
+                'id_produto'              => $estoque->id_produto,
+                'tipo_movimentacao'       => 'S',
+                'canal'                   => 'sistema'
+            ];
+
+            $relarorio = ModelRelatorios::create($datarelatorio);
 
             DB::commit();
             return redirect()->route('baixa-estoque');
