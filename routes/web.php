@@ -22,6 +22,7 @@ Auth::routes();
 Route::middleware(['auth'])->group(function() {
 	Route::get('/dashboard', 'HomeController@index')->name('home');
 	Route::get('/estoque', 'EstoqueController@index')->name('estoque');
+	Route::post('/salvar-estoque', 'EstoqueController@store')->name('salvar-estoque');
 	Route::get('/baixa-estoque', 'EstoqueController@baixaEstoque')->name('baixa-estoque');
 	Route::get('/produtos', 'ProdutosController@index')->name('produtos');
 	Route::post('/excluir-produto', 'ProdutosController@delete')->name('excluir-produto');

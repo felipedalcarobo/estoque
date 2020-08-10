@@ -43,12 +43,13 @@ class ProdutosController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([ 
+            'produto' => 'required|max:25',
+            'preco'   => 'required|max:17',
+        ]);
+
         DB::beginTransaction();
         try {
-            $validatedData = $request->validate([ 
-                'produto' => 'required|unique:produtos|max:25',
-                'preco'   => 'required|max:17',
-            ]);
 
             $data = [
                 'produto'=> request('produto'),
@@ -63,7 +64,8 @@ class ProdutosController extends Controller
             return redirect()->route('produtos');
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->route('falhou');
+            // return redirect()->route('falhou');
+            print_r($e);
         }
     }
 
@@ -98,14 +100,14 @@ class ProdutosController extends Controller
      */
     public function update(Request $request)
     {
+        $validatedData = $request->validate([ 
+            'produto' => 'required|max:25',
+            'preco'   => 'required|max:20',
+        ]);
+
         DB::beginTransaction();
         try {
             $produto = ModelProdutos::findOrFail($request->id);
-
-            $validatedData = $request->validate([ 
-                'produto' => 'required|max:25',
-                'preco'   => 'required|max:20',
-            ]);
 
             $price1 = str_replace(".","", request('preco'));
             $price2 = str_replace(",",".", $price1);
@@ -119,7 +121,8 @@ class ProdutosController extends Controller
             return redirect()->route('produtos');
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->route('falhou');
+            // return redirect()->route('falhou');
+            print_r($e);
         }
     }
 
