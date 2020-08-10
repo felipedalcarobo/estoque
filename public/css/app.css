@@ -10977,3 +10977,44 @@ a.text-dark:focus {
     top: auto !important;
 }
 
+.content-cadastro-cadastrar {
+    margin-top: 25px;
+    font-size: 12px;
+    clear: both;
+    overflow-x: auto;
+}
+
+.content-cadastro-cadastrar .row {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.editar_produto {
+  padding: 10px;
+  background-color: currentColor;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.editar_produto span {
+  color: #FFF;
+}
+
+.deletar_produto {
+  padding: 10px;
+  background-color: red;
+  cursor: pointer;
+}
+
+.deletar_produto span {
+  color: #FFF;
+}
+
+
+
+
+
+
+
+
+

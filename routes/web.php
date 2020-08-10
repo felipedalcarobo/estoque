@@ -24,8 +24,25 @@ Route::middleware(['auth'])->group(function() {
 	Route::get('/estoque', 'EstoqueController@index')->name('estoque');
 	Route::get('/baixa-estoque', 'EstoqueController@baixaEstoque')->name('baixa-estoque');
 	Route::get('/produtos', 'ProdutosController@index')->name('produtos');
+	Route::post('/excluir-produto', 'ProdutosController@delete')->name('excluir-produto');
+	Route::post('/editar-produto', 'ProdutosController@update')->name('editar-produto');
+	Route::post('/salvar-produto', 'ProdutosController@store')->name('salvar-produto');
 	Route::get('/relatorios', 'RelatoriosController@index')->name('relatorios');
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\ModelProdutos;
+use Illuminate\Support\Facades\DB;
 
 class ProdutosController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +16,13 @@ class ProdutosController extends Controller
      */
     public function index()
     {
-        return view('pages/produtos');
+        $id_usuario = auth()->user()->id;
+
+        $produtos = DB::table('produtos')
+            ->where('produtos.user', '=', $id_usuario)->get();
+
+
+        return view('pages/produtos', compact('produtos'));
     }
 
     /**
@@ -34,7 +43,28 @@ class ProdutosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $validatedData = $request->validate([ 
+                'produto' => 'required|unique:produtos|max:25',
+                'preco'   => 'required|max:17',
+            ]);
+
+            $data = [
+                'produto'=> request('produto'),
+                'preco'  => request('preco'),
+                'sku'    => uniqid(date('HisYmd')).auth()->user()->id,
+                'user'   => auth()->user()->id,
+            ];
+
+            $produto = ModelProdutos::create($data);
+
+            DB::commit();
+            return redirect()->route('produtos');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->route('falhou');
+        }
     }
 
     /**
