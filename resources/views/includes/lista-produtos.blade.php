@@ -19,13 +19,15 @@
           <a class="editar_produto" data-toggle="modal" data-target="#modalEditarProduto{{ $produto->id }}">
             <span>Editar</span>
           </a>
+          @include('includes.editar-produto')
           <a class="deletar_produto" data-toggle="modal" data-target="#modalEcluirProduto{{ $produto->id }}">
             <span>Excluir</span>
           </a>
+          @include('includes.excluir-produto')
         </td>
       </tr>
-      @include('includes.editar-produto')
-      @include('includes.excluir-produto')
+      
+      
     @endforeach
   </tbody>
 </table>

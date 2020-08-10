@@ -96,9 +96,40 @@ class ProdutosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $produto = ModelProdutos::findOrFail($request->id);
+
+            $validatedData = $request->validate([ 
+                'produto' => 'required|max:25',
+                'preco'   => 'required|max:20',
+            ]);
+
+            $price1 = str_replace(".","", request('preco'));
+            $price2 = str_replace(",",".", $price1);
+            $price = str_replace("R$ ","", $price2);
+
+            $produto->produto     = $request->produto;
+            $produto->preco       = $price;
+            $produto->save();
+
+            DB::commit();
+            return redirect()->route('produtos');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->route('falhou');
+        }
+    }
+
+    public function delete(Request $request)
+    {
+        $id = request('id');
+        $foto = ModelProdutos::find($id);
+        $foto->delete();
+
+        return redirect()->route('produtos');
     }
 
     /**
@@ -109,6 +140,6 @@ class ProdutosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
     }
 }
