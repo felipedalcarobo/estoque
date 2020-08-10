@@ -101,15 +101,20 @@ class EstoqueController extends Controller
 
         if($estoque) {
         	$this->total = $estoque->quantidade - $input['quantidade'];
+
+        	$validator->after(function ($validator) 
+        	{
+	            if ($this->total < 0 ) 
+	            {
+	                $validator->errors()->add('quantidade', 'Quantidade para é baixa maior que disponivel.');
+	            }
+	        });
+        } else {
+        	$validator->after(function ($validator) 
+        	{
+                $validator->errors()->add('id_estoque', 'id_estoque invalido');
+	        });
         }
-        
-
-        $validator->after(function ($validator) {
-            if ($this->total < 0 ) {
-
-                $validator->errors()->add('quantidade', 'Quantidade para é baixa maior que disponivel.');
-            }
-        });
 
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 401);

@@ -18,8 +18,10 @@ class RelatoriosController extends Controller
         $id_usuario   = auth()->user()->id;
 
         $movimentacao = DB::table('relatorios')
+            ->orderByRaw('relatorios.created_at DESC')
             ->join('produtos', 'produtos.id', '=', 'relatorios.id_produto')
-            ->where('produtos.user', '=', $id_usuario)->get();
+            ->where('produtos.user', '=', $id_usuario)
+            ->get();
 
 
         $estoquebaixo = DB::table('estoque')
