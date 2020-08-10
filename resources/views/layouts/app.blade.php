@@ -72,9 +72,13 @@
             </div>
         </nav>
         <div style="display:flex;flex-wrap: nowrap;">
-            <div class="sidebar" >
-                @include('includes.sidebar')
-            </div>
+            @guest
+
+            @else
+                <div class="sidebar" >
+                    @include('includes.sidebar')
+                </div>
+            @endguest
             <div style="flex-grow:3;">
                 @yield('content')
             </div>

@@ -10909,7 +10909,7 @@ a.text-dark:focus {
   position: relative;
   min-height: 100vh;
   flex-grow:0;
-  background-color: #ff8080;
+  background-color: #2f76bf;
   border-top: 2px solid #FFF;
 }
 
@@ -11009,6 +11009,35 @@ a.text-dark:focus {
 .deletar_produto span {
   color: #FFF;
 }
+
+.content-baixa-produto {
+  display: flex;
+  text-align: center; 
+  justify-content: center;
+}
+
+.content-baixa-produto .row{
+  justify-content: center;
+}
+
+.content-baixa-produto h5 {
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+
+.content-baixa-produto span {
+  font-weight: 500;
+  font-size: 14px;
+  color: red;
+}
+
+
+
+
+
+
+
+
 
 
 

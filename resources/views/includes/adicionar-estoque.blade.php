@@ -23,7 +23,7 @@
 					
 					<div class="form-group col-md-6">
 						<label for="quantidade">{{ __('Quantidade') }} <span>*</span></label>
-						<input id="quantidade" type="number" class="form-control{{ $errors->has('quantidade') ? ' is-invalid' : '' }}" name="quantidade" value="{{ old('quantidade') }}" required min="1">
+						<input id="quantidade" type="number" class="form-control{{ $errors->has('quantidade') ? ' is-invalid' : '' }}" name="quantidade" value="{{ old('quantidade') }}" required maxlength="17" min="1">
 
 						@if ($errors->has('quantidade'))
 						<span class="invalid-feedback" role="alert">
